@@ -1,282 +1,185 @@
 // src/App.jsx
-import React, { useState, useEffect } from "react";
-import { db } from "./firebase";
-import {
-  collection,
-  addDoc,
-  serverTimestamp,
-  onSnapshot,
-  query,
-  orderBy,
-} from "firebase/firestore";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Toaster, toast } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
-// Sounds
-import clickSoundFile from "./assets/sounds/click.mp3";
-import backgroundMusicFile from "./assets/sounds/music.mp3";
-
-// Background
+// Import assets
 import ringsVideo from "./assets/rings-video.mp4";
 import sparklesVideo from "./assets/sparkles-video.mp4";
+import musicFile from "./assets/music.mp3";
+import clickSound from "./assets/button-click.mp3";
 
-// Cards
+// Components
+import RSVPCard from "./RSVPCard";
+import GuestbookCard from "./GuestbookCard";
 import PhotoUploadCard from "./PhotoUploadCard";
 import PredictionsCard from "./PredictionsCard";
 
 const App = () => {
-  const [musicOn, setMusicOn] = useState(false);
+  const [started, setStarted] = useState(false);
 
-  // RSVP state
-  const [rsvpName, setRsvpName] = useState("");
-  const [rsvpEmail, setRsvpEmail] = useState("");
-  const [rsvpNote, setRsvpNote] = useState("");
+  const musicRef = useRef(null);
+  const clickRef = useRef(null);
 
-  // Guestbook state
-  const [guestbookMessage, setGuestbookMessage] = useState("");
-  const [guestbookEntries, setGuestbookEntries] = useState([]);
+  // Start experience
+  const handleStart = () => {
+    setStarted(true);
+    if (musicRef.current) {
+      musicRef.current.play().catch(() => {
+        toast.error("Click again to enable sound 🎶");
+      });
+    }
+  };
 
-  // Audio
-  const clickSound = new Audio(clickSoundFile);
-  const backgroundMusic = new Audio(backgroundMusicFile);
-  backgroundMusic.loop = true;
-
+  // Play button click sound
   const playClick = () => {
-    clickSound.currentTime = 0;
-    clickSound.play();
-  };
-
-  const toggleMusic = () => {
-    playClick();
-    if (musicOn) {
-      backgroundMusic.pause();
-    } else {
-      backgroundMusic.play();
-    }
-    setMusicOn(!musicOn);
-  };
-
-  // RSVP submit
-  const handleRSVPSubmit = async (e) => {
-    e.preventDefault();
-    playClick();
-
-    if (!rsvpName || !rsvpEmail) {
-      toast.error("Please fill in your name and email ✨");
-      return;
-    }
-
-    try {
-      await addDoc(collection(db, "rsvps"), {
-        name: rsvpName,
-        email: rsvpEmail,
-        note: rsvpNote,
-        createdAt: serverTimestamp(),
-      });
-      toast.success("Thank you for your RSVP 💖");
-      setRsvpName("");
-      setRsvpEmail("");
-      setRsvpNote("");
-    } catch (error) {
-      console.error("RSVP error:", error);
-      toast.error("Oops! Something went wrong 😢");
+    if (clickRef.current) {
+      clickRef.current.currentTime = 0;
+      clickRef.current.play().catch(() => {});
     }
   };
-
-  // Guestbook submit
-  const handleGuestbookSubmit = async (e) => {
-    e.preventDefault();
-    playClick();
-
-    if (!guestbookMessage) {
-      toast.error("Please write a message 💌");
-      return;
-    }
-
-    try {
-      await addDoc(collection(db, "guestbook"), {
-        message: guestbookMessage,
-        createdAt: serverTimestamp(),
-      });
-      toast.success("Your message was added 💖");
-      setGuestbookMessage("");
-    } catch (error) {
-      console.error("Guestbook error:", error);
-      toast.error("Oops! Could not save your message 😢");
-    }
-  };
-
-  // Live Guestbook listener
-  useEffect(() => {
-    const q = query(collection(db, "guestbook"), orderBy("createdAt", "desc"));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setGuestbookEntries(snapshot.docs.map((doc) => doc.data()));
-    });
-    return () => unsubscribe();
-  }, []);
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-gradient-to-b from-pink-50 to-pink-100">
+    <div className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-pink-50 to-rose-100">
       <Toaster position="top-center" />
 
-      {/* Background videos */}
-      <motion.video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover opacity-20"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.2 }}
-        transition={{ duration: 2 }}
-      >
-        <source src={sparklesVideo} type="video/mp4" />
-      </motion.video>
+      {/* Hidden Audio */}
+      <audio ref={musicRef} loop src={musicFile} preload="auto" />
+      <audio ref={clickRef} src={clickSound} preload="auto" />
 
-      <motion.video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute bottom-0 right-0 w-1/3 rounded-2xl opacity-40"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.4 }}
-        transition={{ duration: 2, delay: 0.5 }}
-      >
-        <source src={ringsVideo} type="video/mp4" />
-      </motion.video>
+      {/* Background Videos */}
+      {started && (
+        <>
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-40"
+          >
+            <source src={ringsVideo} type="video/mp4" />
+          </video>
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-screen"
+          >
+            <source src={sparklesVideo} type="video/mp4" />
+          </video>
+        </>
+      )}
 
-      {/* Header */}
-      <motion.h1
-        className="text-4xl md:text-5xl font-bold text-pink-700 drop-shadow-lg flex items-center gap-2"
-        initial={{ opacity: 0, y: -40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-      >
-        💍 Our Engagement Celebration
-      </motion.h1>
-      <motion.p
-        className="text-lg text-pink-600 mt-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 1 }}
-      >
-        Join us for a day of love, laughter, and unforgettable memories ✨
-      </motion.p>
-
-      {/* Cards Grid */}
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 z-10 w-full max-w-6xl px-6"
-        initial="hidden"
-        animate="show"
-        variants={{
-          hidden: {},
-          show: {
-            transition: { staggerChildren: 0.2 },
-          },
-        }}
-      >
-        {/* RSVP */}
-        <motion.div
-          className="bg-white bg-opacity-80 p-6 rounded-2xl shadow-lg backdrop-blur-md"
-          variants={{
-            hidden: { opacity: 0, y: 30 },
-            show: { opacity: 1, y: 0 },
-          }}
-          whileHover={{ scale: 1.02 }}
-        >
-          <h2 className="text-2xl font-semibold text-pink-700 mb-4">RSVP 📅</h2>
-          <form onSubmit={handleRSVPSubmit} className="flex flex-col gap-3">
-            <input
-              type="text"
-              placeholder="Your Full Name"
-              value={rsvpName}
-              onChange={(e) => setRsvpName(e.target.value)}
-              className="p-2 border rounded-lg focus:ring-2 focus:ring-pink-400"
-            />
-            <input
-              type="email"
-              placeholder="Your Email"
-              value={rsvpEmail}
-              onChange={(e) => setRsvpEmail(e.target.value)}
-              className="p-2 border rounded-lg focus:ring-2 focus:ring-pink-400"
-            />
-            <textarea
-              placeholder="Leave a note for us ✨"
-              value={rsvpNote}
-              onChange={(e) => setRsvpNote(e.target.value)}
-              className="p-2 border rounded-lg focus:ring-2 focus:ring-pink-400"
-            />
-            <button
-              type="submit"
-              className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-lg transition"
+      {/* Floating Petals & Sparkles */}
+      {started && (
+        <div className="pointer-events-none">
+          {[...Array(12)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute text-2xl"
+              initial={{
+                x: Math.random() * window.innerWidth,
+                y: -50,
+                opacity: 0,
+              }}
+              animate={{
+                y: window.innerHeight + 50,
+                opacity: [0, 1, 0],
+                x: `+=${Math.random() * 100 - 50}`,
+              }}
+              transition={{
+                duration: 10 + Math.random() * 10,
+                repeat: Infinity,
+                delay: i * 2,
+              }}
             >
-              Submit RSVP
-            </button>
-          </form>
-        </motion.div>
+              {Math.random() > 0.5 ? "🌸" : "✨"}
+            </motion.div>
+          ))}
+        </div>
+      )}
 
-        {/* Guestbook */}
-        <motion.div
-          className="bg-white bg-opacity-80 p-6 rounded-2xl shadow-lg backdrop-blur-md"
-          variants={{
-            hidden: { opacity: 0, y: 30 },
-            show: { opacity: 1, y: 0 },
-          }}
-          whileHover={{ scale: 1.02 }}
-        >
-          <h2 className="text-2xl font-semibold text-pink-700 mb-4">
-            Guestbook 💌
-          </h2>
-          <form onSubmit={handleGuestbookSubmit} className="flex flex-col gap-3">
-            <textarea
-              placeholder="Write your message..."
-              value={guestbookMessage}
-              onChange={(e) => setGuestbookMessage(e.target.value)}
-              className="p-2 border rounded-lg focus:ring-2 focus:ring-pink-400"
-            />
-            <button
-              type="submit"
-              className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-lg transition"
+      {/* Entry Overlay */}
+      <AnimatePresence>
+        {!started && (
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-rose-100 via-pink-200 to-rose-100 z-50"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <motion.button
+              onClick={() => {
+                playClick();
+                handleStart();
+              }}
+              className="px-8 py-4 bg-pink-600 text-white text-xl font-bold rounded-2xl shadow-lg hover:bg-pink-700 transition-all"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Sign Guestbook
-            </button>
-          </form>
-          <div className="mt-4 text-left max-h-40 overflow-y-auto">
-            <AnimatePresence>
-              {guestbookEntries.length > 0 ? (
-                guestbookEntries.map((entry, i) => (
-                  <motion.p
-                    key={i}
-                    className="text-sm text-pink-700 mb-2"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                  >
-                    {entry.message}
-                  </motion.p>
-                ))
-              ) : (
-                <p className="text-sm text-gray-500">No messages yet ✨</p>
-              )}
-            </AnimatePresence>
-          </div>
-        </motion.div>
+              ✨ Click to Enter ✨
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-        {/* Photo Upload */}
-        <PhotoUploadCard />
+      {/* Main Content */}
+      {started && (
+        <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-4">
+          {/* Title */}
+          <motion.h1
+            className="text-4xl md:text-5xl font-extrabold text-pink-800 mb-4 drop-shadow-lg flex items-center gap-2"
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            💍 Our Engagement Celebration
+          </motion.h1>
 
-        {/* Predictions */}
-        <PredictionsCard />
-      </motion.div>
+          <motion.p
+            className="text-lg text-gray-700 mb-10 text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            Join us for a day of love, laughter, and unforgettable memories ✨
+          </motion.p>
 
-      {/* Music toggle */}
-      <button
-        onClick={toggleMusic}
-        className="fixed bottom-6 right-6 bg-pink-500 hover:bg-pink-600 text-white rounded-full p-4 shadow-lg transition"
-      >
-        {musicOn ? "🔊" : "🔈"}
-      </button>
+          {/* Cards Grid */}
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl w-full"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+          >
+            <div onClick={playClick}>
+              <RSVPCard />
+            </div>
+            <div onClick={playClick}>
+              <GuestbookCard />
+            </div>
+            <div onClick={playClick}>
+              <PhotoUploadCard />
+            </div>
+            <div onClick={playClick}>
+              <PredictionsCard />
+            </div>
+          </motion.div>
+
+          {/* Footer */}
+          <motion.footer
+            className="mt-10 text-gray-600 text-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2 }}
+          >
+            Made with ❤️ for our special day
+          </motion.footer>
+        </div>
+      )}
     </div>
   );
 };
