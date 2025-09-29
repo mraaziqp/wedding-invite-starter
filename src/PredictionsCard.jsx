@@ -13,6 +13,7 @@ import {
   increment,
 } from "firebase/firestore";
 import { motion } from "framer-motion";
+import { toast } from "react-hot-toast";
 
 function PredictionsCard() {
   const [prediction, setPrediction] = useState("");
@@ -37,8 +38,10 @@ function PredictionsCard() {
         createdAt: serverTimestamp(),
       });
       setPrediction("");
+      toast.success("Prediction added 🔮");
     } catch (error) {
       console.error("Error saving prediction: ", error);
+      toast.error("Oops! Could not save prediction 😢");
     }
   };
 
@@ -56,10 +59,6 @@ function PredictionsCard() {
       whileHover={{ scale: 1.02 }}
       className="relative bg-white/90 backdrop-blur-lg p-6 rounded-2xl shadow-xl border-4 border-pink-100"
     >
-      {/* 🌸 Decorative corners */}
-      <div className="absolute -top-4 -left-4 text-3xl text-pink-300">🔮</div>
-      <div className="absolute -top-4 -right-4 text-3xl text-pink-300">✨</div>
-
       <h2 className="text-2xl font-bold text-pink-700 mb-4">Predictions 🔮</h2>
       <form onSubmit={handlePrediction} className="space-y-3">
         <input
@@ -77,9 +76,9 @@ function PredictionsCard() {
         </button>
       </form>
 
-      {/* 🔝 Leaderboard */}
+      {/* Leaderboard */}
       <div className="mt-4 max-h-56 overflow-y-auto space-y-3">
-        {predictions.map((p, i) => (
+        {predictions.map((p) => (
           <motion.div
             key={p.id}
             initial={{ opacity: 0, y: 10 }}
