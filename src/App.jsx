@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 export default function App() {
   return (
-    <div className="relative min-h-screen flex flex-col items-center py-12 overflow-hidden">
+    <div className="relative min-h-screen flex flex-col items-center py-12 overflow-hidden bg-gradient-to-br from-pink-50 via-white to-pink-100">
       {/* Floating Sparkles */}
       <motion.div
         className="absolute top-20 left-10 text-2xl"
@@ -17,14 +17,14 @@ export default function App() {
         ✨
       </motion.div>
       <motion.div
-        className="absolute top-40 right-12 text-2xl"
+        className="absolute top-40 right-12 text-3xl"
         animate={{ y: [0, -20, 0] }}
         transition={{ repeat: Infinity, duration: 4 }}
       >
         💍
       </motion.div>
       <motion.div
-        className="absolute bottom-20 left-1/3 text-xl"
+        className="absolute bottom-20 left-1/3 text-2xl"
         animate={{ y: [0, -10, 0] }}
         transition={{ repeat: Infinity, duration: 5 }}
       >
