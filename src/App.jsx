@@ -1,129 +1,131 @@
+// src/App.jsx
 import React from "react";
-import { Card, CardContent } from "./components/ui/card";
-import { Button } from "./components/ui/button";
-import { Input } from "./components/ui/input";
-import { Textarea } from "./components/ui/textarea";
 import { motion } from "framer-motion";
-
-// Import videos
+import RSVPCard from "./RSVPCard";
+import GuestbookCard from "./GuestbookCard";
+import PhotoUploadCard from "./PhotoUploadCard";
+import PredictionsCard from "./PredictionsCard";
+import RevealOverlay from "./RevealOverlay";
+import MusicToggle from "./MusicToggle";
 import ringVideo from "./assets/ring-animation.mp4";
 import flowersVideo from "./assets/flowers.mp4";
 
-export default function App() {
+function App() {
   return (
-    <div className="relative min-h-screen flex flex-col items-center py-12 overflow-hidden bg-gradient-to-br from-pink-50 via-white to-pink-100">
-      {/* Background Videos */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover opacity-20 z-0"
+    <div className="relative min-h-screen bg-gradient-to-b from-pink-50 to-rose-100 flex flex-col items-center justify-center overflow-hidden">
+      {/* 🎭 Curtain Reveal */}
+      <RevealOverlay />
+
+      {/* 🎥 Background videos */}
+      <div className="absolute inset-0 z-0 opacity-25">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-0 left-0 w-full h-full object-cover scale-105 blur-sm"
+        >
+          <source src={flowersVideo} type="video/mp4" />
+        </video>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-0 left-0 w-full h-full object-cover mix-blend-overlay"
+        >
+          <source src={ringVideo} type="video/mp4" />
+        </video>
+      </div>
+
+      {/* 🌸 Floating petals + sparkles */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute text-pink-300 text-2xl"
+            style={{ left: `${Math.random() * 100}%`, top: `-${Math.random() * 20}%` }}
+            animate={{ y: ["0%", "120vh"], rotate: [0, 360] }}
+            transition={{
+              duration: 10 + Math.random() * 10,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+              ease: "linear",
+            }}
+          >
+            {Math.random() > 0.5 ? "🌸" : "✨"}
+          </motion.div>
+        ))}
+      </div>
+
+      {/* 💍 Title */}
+      <motion.h1
+        initial={{ opacity: 0, y: -40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="text-5xl md:text-6xl font-extrabold text-pink-700 drop-shadow-lg text-center mt-12 z-10"
       >
-        <source src={flowersVideo} type="video/mp4" />
-      </video>
-
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-10 right-10 w-1/3 lg:w-1/4 opacity-30 z-0 rounded-xl shadow-lg"
+        💍 Our Engagement Celebration
+      </motion.h1>
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 1 }}
+        className="text-lg md:text-xl text-gray-700 mt-4 mb-12 z-10 text-center max-w-2xl"
       >
-        <source src={ringVideo} type="video/mp4" />
-      </video>
+        Join us for a day of love, laughter, and unforgettable memories ✨
+      </motion.p>
 
-      {/* Floating Sparkles */}
-      <motion.div
-        className="absolute top-20 left-10 text-2xl z-10"
-        animate={{ y: [0, -15, 0] }}
-        transition={{ repeat: Infinity, duration: 3 }}
-      >
-        ✨
-      </motion.div>
-      <motion.div
-        className="absolute top-40 right-12 text-3xl z-10"
-        animate={{ y: [0, -20, 0] }}
-        transition={{ repeat: Infinity, duration: 4 }}
-      >
-        💍
-      </motion.div>
-      <motion.div
-        className="absolute bottom-20 left-1/3 text-2xl z-10"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ repeat: Infinity, duration: 5 }}
-      >
-        🌸
-      </motion.div>
-
-      {/* Header */}
-      <header className="mb-10 text-center relative z-10">
-        <h1 className="text-4xl font-extrabold text-pink-700 drop-shadow-lg">
-          💍 Our Engagement Celebration
-        </h1>
-        <p className="text-gray-600 mt-2 text-lg">
-          Join us for a day of love, laughter, and memories ✨
-        </p>
-      </header>
-
-      {/* Content Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl w-full px-6 relative z-10">
-        {/* RSVP Section */}
-        <Card className="shadow-xl border border-pink-100 rounded-2xl bg-white/80 backdrop-blur-sm">
-          <CardContent className="p-6 text-center">
-            <h2 className="text-2xl font-bold text-pink-700 mb-4">RSVP</h2>
-            <form className="flex flex-col gap-3">
-              <Input placeholder="Your Full Name" />
-              <Input placeholder="Your Email" type="email" />
-              <Textarea placeholder="Leave a note for us ✨" />
-              <Button type="submit" className="mt-3">
-                Submit RSVP
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-
-        {/* Guestbook */}
-        <Card className="shadow-xl border border-pink-100 rounded-2xl bg-white/80 backdrop-blur-sm">
-          <CardContent className="p-6 text-center">
-            <h2 className="text-2xl font-bold text-pink-700 mb-4">Guestbook</h2>
-            <p className="text-gray-500 mb-4">
-              Share your wishes, blessings, or funny memories 💌
-            </p>
-            <Textarea placeholder="Write your message here..." />
-            <Button className="mt-3">Sign Guestbook</Button>
-          </CardContent>
-        </Card>
-
-        {/* Photo Upload */}
-        <Card className="shadow-xl border border-pink-100 rounded-2xl bg-white/80 backdrop-blur-sm">
-          <CardContent className="p-6 text-center">
-            <h2 className="text-2xl font-bold text-pink-700 mb-4">Photo Upload</h2>
-            <p className="text-gray-500 mb-4">
-              Upload your favorite moments 📸
-            </p>
-            <Input type="file" accept="image/*" />
-            <Button className="mt-3">Upload</Button>
-          </CardContent>
-        </Card>
-
-        {/* Predictions / Fun Game */}
-        <Card className="shadow-xl border border-pink-100 rounded-2xl bg-white/80 backdrop-blur-sm">
-          <CardContent className="p-6 text-center">
-            <h2 className="text-2xl font-bold text-pink-700 mb-4">Predictions</h2>
-            <p className="text-gray-500 mb-4">
-              Guess fun things about the day 💫
-            </p>
-            <Input placeholder="Your Prediction" />
-            <Button className="mt-3">Submit Prediction</Button>
-          </CardContent>
-        </Card>
+      {/* ✨ Feature Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl px-6 z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          whileHover={{ scale: 1.03, boxShadow: "0px 8px 20px rgba(255, 182, 193, 0.5)" }}
+        >
+          <RSVPCard />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          whileHover={{ scale: 1.03, boxShadow: "0px 8px 20px rgba(255, 182, 193, 0.5)" }}
+        >
+          <GuestbookCard />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+          whileHover={{ scale: 1.03, boxShadow: "0px 8px 20px rgba(255, 182, 193, 0.5)" }}
+        >
+          <PhotoUploadCard />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9 }}
+          whileHover={{ scale: 1.03, boxShadow: "0px 8px 20px rgba(255, 182, 193, 0.5)" }}
+        >
+          <PredictionsCard />
+        </motion.div>
       </div>
 
       {/* Footer */}
-      <footer className="mt-12 text-center text-sm text-gray-400 relative z-10">
+      <motion.footer
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="mt-14 text-sm text-gray-600 z-10"
+      >
         Made with ❤️ for our special day
-      </footer>
+      </motion.footer>
+
+      {/* 🎶 Music Toggle */}
+      <MusicToggle />
     </div>
   );
 }
+
+export default App;
