@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
     "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}"
@@ -11,11 +11,12 @@ module.exports = {
           pink: "#ec4899",
           rose: "#f43f5e",
           amber: "#f59e0b",
+          champagne: "#f7e7ce"
         },
       },
       fontFamily: {
-        serif: ["Playfair Display", "serif"],
         sans: ["Inter", "sans-serif"],
+        serif: ["Playfair Display", "serif"],
       },
     },
   },
