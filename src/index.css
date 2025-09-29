@@ -1,25 +1,59 @@
-/* Tailwind base reset (if using Tailwind) */
+/* Tailwind base setup */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom global styles */
-body {
+/* Global reset */
+html, body {
   margin: 0;
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Helvetica, Arial, sans-serif;
+  padding: 0;
+  height: 100%;
+  font-family: "Inter", system-ui, sans-serif;
   background: linear-gradient(to bottom, #fff7f7, #fff3e6);
   color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Headings */
 h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", serif;
+  font-weight: 600;
+  color: #2e2e2e;
 }
 
+/* Buttons */
 button {
   transition: all 0.2s ease;
 }
 
 button:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+}
+
+/* Cards */
+.card {
+  @apply bg-white rounded-2xl shadow-md p-4;
+}
+
+/* Inputs */
+input, textarea {
+  @apply w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:outline-none focus:border-pink-500 focus:ring focus:ring-pink-200;
+}
+
+/* Guestbook background (applies floral frame) */
+.guestbook-frame {
+  background-image: url("/assets/guestbook-floral.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  padding: 2rem;
+}
+
+/* Photo gallery */
+.photo-frame {
+  border: 4px solid #fcd34d;
+  border-radius: 1rem;
+  padding: 4px;
+  background: white;
 }
