@@ -3,21 +3,46 @@ import { Card, CardContent } from "./components/ui/card";
 import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import { Textarea } from "./components/ui/textarea";
+import { motion } from "framer-motion";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white flex flex-col items-center py-12">
+    <div className="relative min-h-screen flex flex-col items-center py-12 overflow-hidden">
+      {/* Floating Sparkles */}
+      <motion.div
+        className="absolute top-20 left-10 text-2xl"
+        animate={{ y: [0, -15, 0] }}
+        transition={{ repeat: Infinity, duration: 3 }}
+      >
+        ✨
+      </motion.div>
+      <motion.div
+        className="absolute top-40 right-12 text-2xl"
+        animate={{ y: [0, -20, 0] }}
+        transition={{ repeat: Infinity, duration: 4 }}
+      >
+        💍
+      </motion.div>
+      <motion.div
+        className="absolute bottom-20 left-1/3 text-xl"
+        animate={{ y: [0, -10, 0] }}
+        transition={{ repeat: Infinity, duration: 5 }}
+      >
+        🌸
+      </motion.div>
+
       {/* Header */}
-      <header className="mb-10 text-center">
-        <h1 className="text-4xl font-extrabold text-pink-700">
+      <header className="mb-10 text-center relative z-10">
+        <h1 className="text-4xl font-extrabold text-pink-700 drop-shadow-lg">
           💍 Our Engagement Celebration
         </h1>
-        <p className="text-gray-600 mt-2">
+        <p className="text-gray-600 mt-2 text-lg">
           Join us for a day of love, laughter, and memories ✨
         </p>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl w-full px-6">
+      {/* Content Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl w-full px-6 relative z-10">
         {/* RSVP Section */}
         <Card className="shadow-xl border border-pink-100 rounded-2xl">
           <CardContent className="p-6 text-center">
@@ -26,7 +51,9 @@ export default function App() {
               <Input placeholder="Your Full Name" />
               <Input placeholder="Your Email" type="email" />
               <Textarea placeholder="Leave a note for us ✨" />
-              <Button type="submit" className="mt-3">Submit RSVP</Button>
+              <Button type="submit" className="mt-3">
+                Submit RSVP
+              </Button>
             </form>
           </CardContent>
         </Card>
@@ -69,7 +96,7 @@ export default function App() {
       </div>
 
       {/* Footer */}
-      <footer className="mt-12 text-center text-sm text-gray-400">
+      <footer className="mt-12 text-center text-sm text-gray-400 relative z-10">
         Made with ❤️ for our special day
       </footer>
     </div>
