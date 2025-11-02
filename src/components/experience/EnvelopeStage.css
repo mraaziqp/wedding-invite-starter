@@ -346,8 +346,8 @@
   }
 
     .wax-button {
-        top: 41%;
-        left: 42.5%;
+        top: 54%;
+        left: 50%;
         transform: translate(-50%, -50%);
     }
 
@@ -358,7 +358,7 @@
   }
 
     .invite-card-wrapper {
-        bottom: clamp(-110px, -18vw, -80px);
+        bottom: clamp(-110px, -18vw, -90px);
     }
 
     .invite-card {

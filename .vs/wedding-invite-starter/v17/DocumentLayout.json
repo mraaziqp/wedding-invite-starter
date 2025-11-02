@@ -36,7 +36,7 @@
               "RelativeDocumentMoniker": "src\\components\\experience\\EnvelopeStage.css",
               "ToolTip": "C:\\Users\\mraaz\\OneDrive\\Documents\\github clones\\wedding-invite-starter\\src\\components\\experience\\EnvelopeStage.css",
               "RelativeToolTip": "src\\components\\experience\\EnvelopeStage.css",
-              "ViewState": "AgIAAFYBAAAAAAAAAAAuwGwBAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAEQBAAAAAAAAAAAuwGgBAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-11-02T21:03:02.155Z",
               "EditorCaption": ""
@@ -51,8 +51,7 @@
               "RelativeToolTip": "src\\styles\\global.css",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-11-02T21:02:33.238Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-02T21:02:33.238Z"
             },
             {
               "$type": "Document",
@@ -64,8 +63,7 @@
               "RelativeToolTip": "vite.config.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-02T21:01:09.157Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-02T21:01:09.157Z"
             },
             {
               "$type": "Document",
@@ -77,8 +75,7 @@
               "RelativeToolTip": "vercel.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-11-02T21:00:43.962Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-02T21:00:43.962Z"
             }
           ]
         }
