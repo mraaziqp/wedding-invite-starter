@@ -105,3 +105,11 @@
     border-radius: 28px;
   }
 }
+html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+* {
+    box-sizing: border-box;
+}

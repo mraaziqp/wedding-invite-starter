@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\experience\\EnvelopeStage.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mraaz\\OneDrive\\Documents\\github clones\\wedding-invite-starter\\src\\styles\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\styles\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mraaz\\OneDrive\\Documents\\github clones\\wedding-invite-starter\\src\\styles\\global.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\styles\\global.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
@@ -26,8 +30,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "app.css",
+              "DocumentMoniker": "C:\\Users\\mraaz\\OneDrive\\Documents\\github clones\\wedding-invite-starter\\src\\styles\\app.css",
+              "RelativeDocumentMoniker": "src\\styles\\app.css",
+              "ToolTip": "C:\\Users\\mraaz\\OneDrive\\Documents\\github clones\\wedding-invite-starter\\src\\styles\\app.css",
+              "RelativeToolTip": "src\\styles\\app.css",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAAAGsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-11-02T21:54:55.268Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -36,14 +53,14 @@
               "RelativeDocumentMoniker": "src\\components\\experience\\EnvelopeStage.css",
               "ToolTip": "C:\\Users\\mraaz\\OneDrive\\Documents\\github clones\\wedding-invite-starter\\src\\components\\experience\\EnvelopeStage.css",
               "RelativeToolTip": "src\\components\\experience\\EnvelopeStage.css",
-              "ViewState": "AgIAAJIBAAAAAAAAAAAuwJ8BAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAqwKQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-11-02T21:03:02.155Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "global.css",
               "DocumentMoniker": "C:\\Users\\mraaz\\OneDrive\\Documents\\github clones\\wedding-invite-starter\\src\\styles\\global.css",
               "RelativeDocumentMoniker": "src\\styles\\global.css",
@@ -56,7 +73,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "vite.config.js",
               "DocumentMoniker": "C:\\Users\\mraaz\\OneDrive\\Documents\\github clones\\wedding-invite-starter\\vite.config.js",
               "RelativeDocumentMoniker": "vite.config.js",
@@ -68,7 +85,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "vercel.json",
               "DocumentMoniker": "C:\\Users\\mraaz\\OneDrive\\Documents\\github clones\\wedding-invite-starter\\vercel.json",
               "RelativeDocumentMoniker": "vercel.json",
