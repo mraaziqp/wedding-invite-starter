@@ -5,7 +5,9 @@
     "\\src\\components",
     "\\src\\components\\experience",
     "\\src\\data",
-    "\\src\\hooks"
+    "\\src\\hooks",
+    "\\src\\styles"
   ],
+  "SelectedNode": "\\src\\styles\\global.css",
   "PreviewInSolutionExplorer": false
 }
