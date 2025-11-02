@@ -202,12 +202,12 @@
 }
 
 .invite-card-wrapper {
-  position: absolute;
-  bottom: clamp(-120px, -9.4vw, -82px);
-  display: grid;
-  place-items: center;
-  width: 100%;
-  pointer-events: none;
+    position: absolute;
+    bottom: clamp(-90px, -7vw, -64px);
+    display: grid;
+    place-items: center;
+    width: 100%;
+    pointer-events: none;
 }
 
 .invite-card {
@@ -346,8 +346,8 @@
   }
 
     .wax-button {
-        top: 50%;
-        left: 50%;
+        top: 41%;
+        left: 42.5%;
         transform: translate(-50%, -50%);
     }
 
@@ -357,13 +357,13 @@
     width: clamp(120px, 30vw, 180px);
   }
 
-  .invite-card-wrapper {
-    bottom: clamp(-160px, -26vw, -108px);
-  }
+    .invite-card-wrapper {
+        bottom: clamp(-110px, -18vw, -80px);
+    }
 
-  .invite-card {
-    width: min(440px, 86vw);
-  }
+    .invite-card {
+        width: min(440px, 90vw);
+    }
 }
 
 @media (max-width: 520px) {
@@ -383,4 +383,14 @@
   .invite-card {
     width: min(380px, 94vw);
   }
+}
+@media (max-width: 600px) {
+    .invite-card-container {
+        padding-bottom: 40vh; /* space under card */
+    }
+
+    .invite-stage {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
 }
