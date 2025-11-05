@@ -439,7 +439,7 @@
 .envelope-stage {
   position: relative;
   left: 50% !important;
-  transform: translate(-50%, 12px) !important; /* Move down slightly */
+  transform: translate(-50%, 30px) !important; /* Move down slightly */
   display: block;
 }
 
