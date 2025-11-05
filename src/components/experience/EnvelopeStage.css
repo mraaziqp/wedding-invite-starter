@@ -133,8 +133,8 @@
 
 .wax-button {
   position: absolute;
-  top: 42%;
-  left: 41%;
+  top: 43%;
+  left: 41.4%;
   z-index: 3;
   border: none;
   background: transparent;
@@ -381,8 +381,8 @@
     }
 
     .wax-button {
-        left: 50% !important;
-        top: 48% !important;
+        left: 43% !important;
+        top: 41.4% !important;
         transform: translate(-50%, -50%) !important;
         z-index: 10 !important;
     }
