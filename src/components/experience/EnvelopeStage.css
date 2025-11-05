@@ -381,7 +381,7 @@
     }
 
     .wax-button {
-        left: 33% !important;
+        left: 35% !important;
         top: 39% !important;
         transform: translate(-50%, -50%) !important;
         z-index: 10 !important;
@@ -431,5 +431,37 @@
   .invite-card {
     width: min(540px, 84vw) !important;
     max-width: 540px;
+  }
+}
+
+/* --- Android / Huawei WebView Fix --- */
+@media (max-width: 820px) {
+  .envelope-stage {
+    position: relative;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: block;
+  }
+
+  .envelope-shell,
+  .invite-card {
+    position: relative;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 92vw !important;
+    max-width: 440px !important;
+  }
+
+  .wax-button {
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+}
+
+/* Huawei fallback for bugged vw */
+@supports (-webkit-line-clamp: 1) and (not (translate: 0)) {
+  .envelope-shell,
+  .invite-card {
+    width: calc(100% - 24px) !important;
   }
 }
