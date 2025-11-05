@@ -133,7 +133,7 @@
 
 .wax-button {
   position: absolute;
-  top: 43%;
+  top: 44%;
   left: 40.8%;
   z-index: 3;
   border: none;
@@ -178,10 +178,10 @@
 }
 
 .waxseal {
-  position: relative;
-  width: clamp(68px, 9vw, 98px);
-  filter: drop-shadow(0 22px 38px color-mix(in srgb, var(--theme-color-accent, #d2b16a) 52%, rgba(0, 0, 0, 0)));
-  transition: transform 0.35s ease, filter 0.35s ease;
+    position: relative;
+    width: clamp(80px, 24vw, 120px) !important;
+    filter: drop-shadow(0 22px 38px color-mix(in srgb, var(--theme-color-accent, #d2b16a) 52%, rgba(0, 0, 0, 0)));
+    transition: transform 0.35s ease, filter 0.35s ease;
 }
 
 .wax-button:hover .waxseal {
@@ -388,7 +388,7 @@
     }
 
     .waxseal {
-        width: clamp(68px, 22vw, 100px) !important;
+        width: clamp(80px, 24vw, 120px) !important;
     }
 }
 
@@ -402,9 +402,9 @@
     padding-bottom: clamp(14px, 5.6vw, 26px);
   }
 
-  .waxseal {
-    width: clamp(68px, 28vw, 98px);
-  }
+    .waxseal {
+        width: clamp(80px, 24vw, 120px) !important;
+    }
 
   .invite-card {
     max-width: 420px;
