@@ -381,7 +381,7 @@
     }
 
     .wax-button {
-        left: 37% !important;
+        left: 40% !important;
         top: 39% !important;
         transform: translate(-50%, -50%) !important;
         z-index: 10 !important;
@@ -436,12 +436,12 @@
 
 /* --- Android / Huawei WebView Fix --- */
 @media (max-width: 820px) {
-  .envelope-stage {
-    position: relative;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    display: block;
-  }
+.envelope-stage {
+  position: relative;
+  left: 50% !important;
+  transform: translate(-50%, 12px) !important; /* Move down slightly */
+  display: block;
+}
 
   .envelope-shell,
   .invite-card {
