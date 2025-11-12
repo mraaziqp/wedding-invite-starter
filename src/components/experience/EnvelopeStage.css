@@ -478,3 +478,35 @@
     padding-bottom: 40px !important;
   }
 }
+/* --- Rose Gold Wax Seal Variant --- */
+
+.waxseal--rosegold {
+  position: relative;
+  width: clamp(80px, 24vw, 120px) !important;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background: url('/wax-seal-rosegold.png') center/contain no-repeat;
+  border-radius: 50%;
+  clip-path: circle(50% at 50% 50%);
+  filter: drop-shadow(0 22px 38px rgba(212, 161, 136, 0.5));
+  transition: transform 0.35s ease, filter 0.35s ease;
+  z-index: 3;
+}
+
+.wax-button:hover .waxseal--rosegold {
+  transform: scale(1.06);
+  filter: drop-shadow(0 28px 55px rgba(212, 161, 136, 0.65));
+}
+
+/* Same alignment behavior */
+.envelope-stage[data-wax-shape='round'] .waxseal--rosegold {
+  border-radius: 50%;
+  clip-path: circle(50% at 50% 50%);
+}
+
+/* On mobile, preserve same fitment */
+@media (max-width: 760px) {
+  .waxseal--rosegold {
+    width: clamp(80px, 24vw, 120px) !important;
+  }
+}
